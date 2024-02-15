@@ -21,7 +21,7 @@ class Base:
         """Initialize a new Base.
 
         Args:
-        id (int): The identity of the new Base.
+            id (int): The identity of the new Base.
         """
         if id is not None:
             self.id = id
@@ -34,7 +34,7 @@ class Base:
         """Return the JSON serialization of a list of dicts.
 
         Args:
-        list_dictionaries (list): A list of dictionaries.
+            list_dictionaries (list): A list of dictionaries.
         """
         if list_dictionaries is None or list_dictionaries == []:
             return "[]"
@@ -45,7 +45,7 @@ class Base:
         """Write the JSON serialization of a list of objects to a file.
 
         Args:
-        list_objs (list): A list of inherited Base instances.
+            list_objs (list): A list of inherited Base instances.
         """
         filename = cls.__name__ + ".json"
         with open(filename, "w") as jsonfile:
@@ -60,10 +60,10 @@ class Base:
         """Return the deserialization of a JSON string.
 
         Args:
-        json_string (str): A JSON str representation of a list of dicts.
+            json_string (str): A JSON str representation of a list of dicts.
         Returns:
-        If json_string is None or empty - an empty list.
-        Otherwise - the Python list represented by json_string.
+            If json_string is None or empty - an empty list.
+            Otherwise - the Python list represented by json_string.
         """
         if json_string is None or json_string == "[]":
             return []
@@ -74,7 +74,7 @@ class Base:
         """Return a class instantied from a dictionary of attributes.
 
         Args:
-        **dictionary (dict): Key/value pairs of attributes to initialize.
+            **dictionary (dict): Key/value pairs of attributes to initialize.
         """
         if dictionary and dictionary != {}:
             if cls.__name__ == "Rectangle":
@@ -91,8 +91,8 @@ class Base:
         Reads from `<cls.__name__>.json`.
 
         Returns:
-        If the file does not exist - an empty list.
-        Otherwise - a list of instantiated classes.
+            If the file does not exist - an empty list.
+            Otherwise - a list of instantiated classes.
         """
         filename = str(cls.__name__) + ".json"
         try:
@@ -107,7 +107,7 @@ class Base:
         """Write the CSV serialization of a list of objects to a file.
 
         Args:
-        list_objs (list): A list of inherited Base instances.
+            list_objs (list): A list of inherited Base instances.
         """
         filename = cls.__name__ + ".csv"
         with open(filename, "w", newline="") as csvfile:
@@ -129,8 +129,8 @@ class Base:
         Reads from `<cls.__name__>.csv`.
 
         Returns:
-        If the file does not exist - an empty list.
-        Otherwise - a list of instantiated classes.
+            If the file does not exist - an empty list.
+            Otherwise - a list of instantiated classes.
         """
         filename = cls.__name__ + ".csv"
         try:
@@ -141,7 +141,7 @@ class Base:
                     fieldnames = ["id", "size", "x", "y"]
                 list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
                 list_dicts = [dict([k, int(v)] for k, v in d.items())
-                        for d in list_dicts]
+                              for d in list_dicts]
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
@@ -151,8 +151,8 @@ class Base:
         """Draw Rectangles and Squares using the turtle module.
 
         Args:
-        list_rectangles (list): A list of Rectangle objects to draw.
-        list_squares (list): A list of Square objects to draw.
+            list_rectangles (list): A list of Rectangle objects to draw.
+            list_squares (list): A list of Square objects to draw.
         """
         turt = turtle.Turtle()
         turt.screen.bgcolor("#b7312c")
@@ -172,17 +172,17 @@ class Base:
                 turt.left(90)
             turt.hideturtle()
 
-            turt.color("#b5e3d8")
-            for sq in list_squares:
-                turt.showturtle()
-                turt.up()
-                turt.goto(sq.x, sq.y)
-                turt.down()
-                for i in range(2):
-                    turt.forward(sq.width)
-                    turt.left(90)
-                    turt.forward(sq.height)
-                    turt.left(90)
-                turt.hideturtle()
+        turt.color("#b5e3d8")
+        for sq in list_squares:
+            turt.showturtle()
+            turt.up()
+            turt.goto(sq.x, sq.y)
+            turt.down()
+            for i in range(2):
+                turt.forward(sq.width)
+                turt.left(90)
+                turt.forward(sq.height)
+                turt.left(90)
+            turt.hideturtle()
 
-            turtle.exitonclick()
+        turtle.exitonclick()
